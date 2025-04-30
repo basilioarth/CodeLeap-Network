@@ -1,0 +1,22 @@
+:root {
+  --gray: #DDDDDD;
+  --gray-100: #CCCCCC;
+  --gray-200: #777777;
+  --white: #FFFFFF;
+  --black: #000000;
+  --blue: #7695EC;
+}
+
+:focus { 
+  outline: transparent;
+}
+
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--gray);
+}
