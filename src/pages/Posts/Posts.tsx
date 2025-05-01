@@ -100,22 +100,30 @@ export function Posts() {
                     {
                         isLoading ? 
                         (
-                            <div>Carregando...</div>
+                            <div className={styles.noPosts}>
+                                <h1>Loading...</h1>
+                            </div>
                         )
                         : 
                         (
-                            postsList.map((post) => (
-                                <Post
-                                    key={post.id}
-                                    id={post.id}
-                                    loggedUser={loggedUsername}
-                                    username={post.username}
-                                    title={post.title}
-                                    content={post.content}
-                                    createdAt={post.created_datetime}
-                                    handleAction={loadAllPosts}
-                                />
-                            ))
+                            postsList.length === 0 ? (
+                                <div className={styles.noPosts}>
+                                    <h1>There are no posts yet.</h1>
+                                </div>
+                            ) : (
+                                postsList.map((post) => (
+                                    <Post
+                                        key={post.id}
+                                        id={post.id}
+                                        loggedUser={loggedUsername}
+                                        username={post.username}
+                                        title={post.title}
+                                        content={post.content}
+                                        createdAt={post.created_datetime}
+                                        handleAction={loadAllPosts}
+                                    />
+                                ))
+                            )
                         )  
                     }
                 </div>
