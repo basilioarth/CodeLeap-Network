@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Signup.module.css';
+import { Input } from '../../components/Input/Input';
 
 export function Signup() {
   const [loggedUsername, setLoggedUsername] = useState('');
@@ -22,15 +23,12 @@ export function Signup() {
     <main className={styles.container}>
       <div className={styles.content}>
         <h1>Welcome to CodeLeap network!</h1>
-        <p>Please enter your username</p>
-        <input 
-          className={`${styles.input} ${
-            loggedUsername ? styles.filled : ''
-          }`}
-          type="text" 
-          placeholder='John doe'
+        <Input
+          label="Please enter your username"
+          name="username"
+          placeholder="John doe"
           value={loggedUsername}
-          onChange={handleInputChange}
+          handleInputChange={handleInputChange}
         />
         <div className={styles.actionContainer}>
           <button 

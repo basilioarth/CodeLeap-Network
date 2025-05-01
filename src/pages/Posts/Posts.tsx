@@ -1,7 +1,9 @@
 import { useLocation } from "react-router-dom";
 import styles from './Posts.module.css';
 import { useEffect, useState } from "react";
-import { Post } from "../components/Post";
+import { Post } from "../../components/Post/Post";
+import { Input } from "../../components/Input/Input";
+import { TextArea } from "../../components/TextArea/TextArea";
 
 export function Posts() {
     const [formData, setFormData] = useState({
@@ -37,25 +39,19 @@ export function Posts() {
             <div className={styles.content}>
                 <div className={styles.newPost}>
                     <h1>What's on your mind?</h1>
-                    <h2>Title</h2>
-                    <input 
-                        type="text"
+                    <Input
+                        label="Title"
                         name="title"
                         placeholder="Hello world"
-                        className={`${styles.input} ${
-                            loggedUsername ? styles.filled : ''
-                        }`}
-                        onChange={handleInputChange}
+                        value={formData.title}
+                        handleInputChange={handleInputChange}
                     />
-                    <h2>Content</h2>
-                    <textarea 
-                        id="content" 
-                        name="content" 
+                    <TextArea
+                        label="Content"
+                        name="content"
                         placeholder="Content here"
-                        className={`${styles.textarea} ${
-                            loggedUsername ? styles.filled : ''
-                        }`}
-                        onChange={handleInputChange}
+                        value={formData.content}
+                        handleTextAreaChange={handleInputChange} 
                     />
                     <div className={styles.actionContainer}>
                     <button 
