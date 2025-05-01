@@ -3,15 +3,19 @@ import { Modal } from '../Modal/Modal';
 import { Input } from '../Input/Input';
 import styles from './Post.module.css';
 import { TextArea } from '../TextArea/TextArea';
+import { deletePost } from '../../http/services/deletePost';
+import { editPost } from '../../http/services/editPost';
 
 interface PostProps {
+    id: number,
     loggedUser: string,
     username: string,
     title: string,
     content: string
+    handleAction: () => void;
 }
 
-export function Post({ loggedUser, username, title, content }: PostProps) {
+export function Post({ id, loggedUser, username, title, content, handleAction }: PostProps) {
     const [formData, setFormData] = useState({
         title: '',
         content: '',
@@ -19,14 +23,26 @@ export function Post({ loggedUser, username, title, content }: PostProps) {
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    function handleDeletePost() {
-        alert("Post deletado!");
+    const handleDeletePost = async () => {
+        try {
+            const response = await deletePost(id);
+            console.log(response);
+        } catch(error) {
+            console.error('Error deleting post:', error);
+        }
         setIsCancelModalOpen(false);
+        handleAction();
     }
 
-    function handleEditPost() {
-        alert("Post editado!");
+    const handleEditPost = async () => {
+        try {
+            const response = await editPost(id, formData.title, formData.content);
+            console.log(response);
+        } catch(error) {
+            console.error('Error editing post:', error);
+        }
         setIsEditModalOpen(false);
+        handleAction();
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -79,14 +95,14 @@ export function Post({ loggedUser, username, title, content }: PostProps) {
                     label="Title"
                     name="title"
                     placeholder="Hello world"
-                    value={formData.title}
+                    value={title}
                     handleInputChange={handleInputChange}
                 />
                 <TextArea 
                     label="Content"
                     name="content"
                     placeholder="Content here"
-                    value={formData.content}
+                    value={content}
                     handleTextAreaChange={handleInputChange}
                 />
             </Modal>
