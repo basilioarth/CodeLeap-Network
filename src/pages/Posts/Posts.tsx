@@ -112,6 +112,7 @@ export function Posts() {
                                     username={post.username}
                                     title={post.title}
                                     content={post.content}
+                                    createdAt={post.created_datetime}
                                     handleAction={loadAllPosts}
                                 />
                             ))

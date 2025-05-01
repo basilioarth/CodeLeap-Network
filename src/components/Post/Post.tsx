@@ -1,27 +1,32 @@
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { Input } from '../Input/Input';
-import styles from './Post.module.css';
 import { TextArea } from '../TextArea/TextArea';
 import { deletePost } from '../../http/services/deletePost';
 import { editPost } from '../../http/services/editPost';
+import { format, formatDistanceToNow } from 'date-fns';
+import styles from './Post.module.css';
 
 interface PostProps {
     id: number,
     loggedUser: string,
     username: string,
     title: string,
-    content: string
+    content: string,
+    createdAt: string,
     handleAction: () => void;
 }
 
-export function Post({ id, loggedUser, username, title, content, handleAction }: PostProps) {
+export function Post({ id, loggedUser, username, title, content, createdAt, handleAction }: PostProps) {
     const [formData, setFormData] = useState({
         title: '',
         content: '',
     });
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const createdAtFormatted = format(createdAt, "MMMM d 'at' h:mm a");
+    const createdDateRelativeToNow = formatDistanceToNow(createdAt, { addSuffix: true });
 
     const handleDeletePost = async () => {
         try {
@@ -73,7 +78,13 @@ export function Post({ id, loggedUser, username, title, content, handleAction }:
             <div className={styles.content}>
                 <div className={styles.infos}>
                     <h2 className={styles.username}>@{username}</h2>
-                    <h2 className={styles.time}>25 minutes ago</h2>
+                    <time 
+                        className={styles.time} 
+                        title={createdAtFormatted} 
+                        dateTime={createdAt}
+                    >
+                        {createdDateRelativeToNow}
+                    </time>
                 </div>
                 <p>{content}</p>
             </div>
