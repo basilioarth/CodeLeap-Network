@@ -2,6 +2,7 @@
   --gray: #DDDDDD;
   --gray-100: #CCCCCC;
   --gray-200: #777777;
+  --gray-300: #999999;
   --white: #FFFFFF;
   --black: #000000;
   --blue: #7695EC;
@@ -19,4 +20,9 @@
 
 body {
   background: var(--gray);
+  
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
 }
