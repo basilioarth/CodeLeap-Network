@@ -1,0 +1,43 @@
+.container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: 0.5rem;
+}
+
+.label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 100%;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.textarea {
+    width: 100%;
+    min-height: 4.625rem;
+    height: fit-content;
+
+    margin: 0rem;
+    padding: 0.438rem 0.668rem 0.438rem 0.668rem;
+
+    border: solid;
+    border-color: var(--gray-200);
+    border-width: 0.063rem;
+    border-radius: 0.5rem;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    line-height: 100%;
+    font-weight: 400;
+    color: var(--gray-100);
+}
+
+.textarea.filled {
+    color: var(--black);
+}
