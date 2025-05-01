@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { Post } from "../../components/Post/Post";
 import { Input } from "../../components/Input/Input";
 import { TextArea } from "../../components/TextArea/TextArea";
+import { getAllPosts } from "../../http/services/getAllPosts";
+import { Post as PostInterface } from "../../interfaces/Post";
+import { createPost } from "../../http/services/createPost";
 
 export function Posts() {
     const [formData, setFormData] = useState({
@@ -11,6 +14,8 @@ export function Posts() {
         content: '',
     });
     const [hasFullFilledRequiredFields, setHasFullFilledRequiredFields] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [postsList, setPostsList] = useState<PostInterface[]>([]);
 
     const location = useLocation();
     const { loggedUsername } = location.state || {};
@@ -24,9 +29,37 @@ export function Posts() {
         }));
     };
 
-    const handleCreatePost = () => {
-        console.log('Post created:', formData);
+    const loadAllPosts = async () => {
+        setIsLoading(true);
+
+        try {
+            const response = await getAllPosts();
+            setPostsList(response);
+            console.log(response);
+        } catch (error: any) {
+            console.error('Error fetching posts:', error);
+        }
+
+        setIsLoading(false);
     }
+
+    const handleCreatePost = async () => {
+        try {
+            await createPost(
+                loggedUsername, 
+                formData.title, 
+                formData.content
+            );
+
+            loadAllPosts();
+        } catch (error: any) {
+            console.error('Error creating post:', error);
+        }
+    }
+
+    useEffect(() => {
+        loadAllPosts();
+    }, []);
 
     useEffect(() => {
         const allFieldsFilled = Object.values(formData).every((value) => value.trim() !== '');
@@ -64,10 +97,26 @@ export function Posts() {
                     </div>
                 </div>
                 <div className={styles.postsList}>
-                    <Post loggedUser={loggedUsername} username={loggedUsername} title={formData.title} content={formData.content} />
-                    <Post loggedUser={loggedUsername} username={"maria"} title={formData.title} content={formData.content} />
-                    <Post loggedUser={loggedUsername} username={loggedUsername} title={formData.title} content={formData.content} />
-                    <Post loggedUser={loggedUsername} username={loggedUsername} title={formData.title} content={formData.content} />
+                    {
+                        isLoading ? 
+                        (
+                            <div>Carregando...</div>
+                        )
+                        : 
+                        (
+                            postsList.map((post) => (
+                                <Post
+                                    key={post.id}
+                                    id={post.id}
+                                    loggedUser={loggedUsername}
+                                    username={post.username}
+                                    title={post.title}
+                                    content={post.content}
+                                    handleAction={loadAllPosts}
+                                />
+                            ))
+                        )  
+                    }
                 </div>
             </div>
         </main>
