@@ -1,54 +1,102 @@
-# React + TypeScript + Vite
+# 🌐 **CodeLeap Network**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📘 **Sobre o Projeto**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A **CodeLeap Network** é uma aplicação desenvolvida para o [processo seletivo da CodeLeap](https://github.com/frontendbr/vagas/issues/8283). Trata-se de uma rede social desenvolvida em React, projetada para permitir que os usuários criem, editem e excluam posts de maneira intuitiva. Ela se integra a uma API fornecida pela CodeLeap para gerenciar os posts.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📂 **Arquitetura dos Diretórios**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+A estrutura de pastas do projeto é organizada da seguinte forma:
+
+```
+CodeLeap-Network/
+├── public/                # Arquivos estáticos
+├── src/                   # Código-fonte da aplicação
+│   ├── components/        # Componentes reutilizáveis
+│   ├── http/              # Serviços de API
+│   ├── interfaces/        # Definições de tipos/interfaces
+│   ├── pages/             # Páginas da aplicação
+│   ├── App.tsx            # Componente principal da aplicação
+│   ├── global.css         # Estilos globais
+│   ├── main.tsx           # Ponto de entrada da aplicação
+│   └── vite-env.d.ts      # Declarações de tipos
+└── ...                    # Arquivos de configuração e dependências
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ **Pré-requisitos**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Antes de começar, certifique-se de ter os seguintes pré-requisitos instalados:
+
+- [Node.js](https://nodejs.org/) (versão 20.x ou superior)
+- [pnpm](https://pnpm.io/installation) ou [Yarn](https://yarnpkg.com/)
+- Um editor de código, como [Visual Studio Code](https://code.visualstudio.com/)
+
+---
+
+## ⚙️ **Instalando Dependências**
+
+Siga os passos abaixo para configurar o ambiente de desenvolvimento:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/basilioarth/CodeLeap-Network.git
+   ```
+
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd CodeLeap-Network
+   ```
+
+3. Instale as dependências:
+   ```bash
+   pnpm install
+   ```
+   ou, se preferir usar Yarn:
+   ```bash
+   yarn install
+   ```
+
+---
+
+## 🚀 **Iniciando a Aplicação**
+
+Para iniciar a aplicação em modo de desenvolvimento, execute o seguinte comando:
+
+```bash
+pnpm run dev
 ```
+ou, se estiver usando Yarn:
+
+```bash
+yarn dev
+```
+
+A aplicação estará disponível em `http://localhost:5173`.
+
+Para gerar uma build de produção, utilize:
+
+```bash
+pnpm run build
+```
+
+A build será gerada na pasta `dist`, pronta para ser deployada.
+
+---
+
+## 🌍 **Acessando o Deploy da Aplicação**
+
+Caso você deseje acessar diretamente a versão já deployada da aplicação, basta clicar no link abaixo:
+
+🔗 [https://code-leap-network-omega.vercel.app/](https://code-leap-network-omega.vercel.app/)
+
+---
+
+### 🎉 Conclusão
+
+Parabéns! Agora você está pront@ para explorar a **CodeLeap Network** 💻✨.
