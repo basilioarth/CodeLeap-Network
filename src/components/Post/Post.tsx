@@ -30,8 +30,7 @@ export function Post({ id, loggedUser, username, title, content, createdAt, hand
 
     const handleDeletePost = async () => {
         try {
-            const response = await deletePost(id);
-            console.log(response);
+            await deletePost(id);
         } catch(error) {
             console.error('Error deleting post:', error);
         }
@@ -41,8 +40,7 @@ export function Post({ id, loggedUser, username, title, content, createdAt, hand
 
     const handleEditPost = async () => {
         try {
-            const response = await editPost(id, formData.title, formData.content);
-            console.log(response);
+            await editPost(id, formData.title, formData.content);
         } catch(error) {
             console.error('Error editing post:', error);
         }
@@ -57,8 +55,6 @@ export function Post({ id, loggedUser, username, title, content, createdAt, hand
             ...prev,
             [name]: value,
         }));
-
-        console.log(formData);
     };
 
     return (

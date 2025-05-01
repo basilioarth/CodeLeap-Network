@@ -35,9 +35,8 @@ export function Posts() {
         try {
             const response = await getAllPosts();
             setPostsList(response);
-            console.log(response);
         } catch (error: any) {
-            console.error('Error fetching posts:', error);
+            console.error('Error getting all posts:', error);
         }
 
         setIsLoading(false);
