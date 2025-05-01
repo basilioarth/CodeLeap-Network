@@ -4,18 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Signup.module.css';
 
 export function Signup() {
-  const [username, setUsername] = useState('');
+  const [loggedUsername, setLoggedUsername] = useState('');
 
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = e.target;
 
-    setUsername(value);
+    setLoggedUsername(value);
   };
 
   const handleNavigation = () => {
-    navigate('/posts', { state: { username }});
+    navigate('/posts', { state: { loggedUsername }});
   };
 
   return (
@@ -25,17 +25,17 @@ export function Signup() {
         <p>Please enter your username</p>
         <input 
           className={`${styles.input} ${
-            username ? styles.filled : ''
+            loggedUsername ? styles.filled : ''
           }`}
           type="text" 
           placeholder='John doe'
-          value={username}
+          value={loggedUsername}
           onChange={handleInputChange}
         />
         <div className={styles.actionContainer}>
           <button 
-            className={username ? styles.enabled : ''}
-            disabled={username === ''}
+            className={loggedUsername ? styles.enabled : ''}
+            disabled={loggedUsername === ''}
             onClick={handleNavigation}
           >
             enter
